@@ -40,12 +40,19 @@ const right = r => {
   return robo
 }
 
-// usage: validate(place({x: 0, y: 0, f: 'N'}))
-validate = ({x, y, f}) => {
+// usage: validate(place)({x: 0, y: 0, f: 'N'})
+const validate = fn => ({x, y, f} = {}) => {
   let {w: xs, h: ys} = tbl; xs -= 1; ys -= 1 // XSize, YSize - upper bounds
 
+  // ensure first command is place()
+  if (( x === undefined || y === undefined || f === undefined ) && fn.name !== 'place') {
+    const f = fn.name
+    console.log(`I can't find a robot to ${(f === 'left' || f === 'left') ? `turn ${f}` : `${f}`}. Have you tried place(), or passing it in?`) 
+    return 
+  }
+
   if (fn.name === 'place') {
-  // catch f errors from place()
+    // catch f errors from place()
     if (!dirs.includes(f)) {
       console.log(`Strange direction ... huh!. Try 'N', 'E', 'S', or 'W'`)
       return { x, y, f } // original bot
@@ -62,4 +69,4 @@ validate = ({x, y, f}) => {
   }
 } 
 
-const robot = validate(place({x: 0, y: 4, f: 'N'}))
+let robot = validate(place)({x: 0, y: 3, f: 'N'})
