@@ -44,15 +44,19 @@ const right = r => {
 validate = ({x, y, f}) => {
   let {w: xs, h: ys} = tbl; xs -= 1; ys -= 1 // XSize, YSize - upper bounds
 
+  if (fn.name === 'place') {
   // catch f errors from place()
-  if (!dirs.includes(f)) throw new Error(`Strange direction ... huh!. Try 'N', 'E', 'S', or 'W'`)
+    if (!dirs.includes(f)) {
+      console.log(`Strange direction ... huh!. Try 'N', 'E', 'S', or 'W'`)
+      return { x, y, f } // original bot
+    }
+  }
 
-  if (
-    x < 0 || 
-    x > xs ||
-    y < 0 ||
-    y > ys ) {
-      throw new Error('Robot will fall off the table!')
+  ;({x, y, f} = fn({x, y, f}))
+
+  // validate move(), place() coordinates
+  if ( x < 0 || x > xs || y < 0 || y > ys ) {
+    console.log('Robot will fall off the table!')
   } else {
     return {x, y, f}
   }
