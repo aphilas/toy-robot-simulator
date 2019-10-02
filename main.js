@@ -3,7 +3,10 @@ const tbl = {
   h: 5
 }
 
-const place = ({x, y, f}) => ({ x, y, f })
+const place = (r) => {
+  const robo = {...r}
+  return robo
+}
 
 const moveMap = new Map([
   ['N', {coord: 'y', diff: 1}],
