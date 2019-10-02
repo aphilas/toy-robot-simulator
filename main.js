@@ -26,7 +26,7 @@ const move = (r) => {
 
 const dirs = ['N', 'E', 'S', 'W']
 
-const left = r => {
+const left = (r) => {
   const robo = {...r}
 
   let pos = dirs.indexOf(robo.f) - 1; pos = pos < 0 ? (pos % 4) + 4: pos
@@ -35,7 +35,7 @@ const left = r => {
   return robo
 }
 
-const right = r => {
+const right = (r) => {
   const robo = {...r}
 
   robo.f = dirs[(dirs.indexOf(robo.f) + 1) % 4]
@@ -44,7 +44,7 @@ const right = r => {
 }
 
 // usage: validate(place)({x: 0, y: 0, f: 'N'})
-const validate = fn => ({x, y, f} = {}) => {
+const validate = (fn) => ({x, y, f} = {}) => {
   let {w: xs, h: ys} = tbl; xs -= 1; ys -= 1 // XSize, YSize - upper bounds
 
   // ensure first command is place()
