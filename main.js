@@ -69,4 +69,9 @@ const validate = fn => ({x, y, f} = {}) => {
   }
 } 
 
+const report = ({ x, y, f } = {}) => {
+  console.log(`The robot is at position (${ x }, ${ y }), facing ${ f }`)
+}
+
 let robot = validate(place)({x: 0, y: 3, f: 'N'})
+report(robot)
